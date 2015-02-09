@@ -1,0 +1,396 @@
+/* style.css */
+/*Student Name: Jiajie Wu*/
+/*ID: W1096011*/
+
+html{
+	height: 906px;
+	overflow: scroll;
+}
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+a {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	color: #fff;
+	text-decoration: none;
+}
+
+p {
+	font-family: Helvetica;
+	color: #fff;
+}
+
+/*styles for main page*/
+#main-body {
+	background-color: #555;
+}
+
+.city-list-item {
+	position: relative;
+	height: 84px;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+	background-color: #718291;
+}
+
+.city-list-item:nth-child(2) {
+	background-color: #0b131e;
+}
+
+.time {
+	position: absolute;
+	top: 21px;
+	left: 16px;
+	font-family: Helvetica;
+	font-size: 15px;
+	color: #fff;
+}
+
+.city {
+	position: absolute;
+	top: 36px;
+	left: 16px;
+	font-family: Helvetica;
+	font-size: 30px;
+	color: #fff;
+}
+
+.temp {
+	position: absolute;
+	top: 50%;
+	right: 16px;
+	font-family: "Helvetica Neue Light", "HelveticaNeue-UltraLight", Helvetica;
+	font-size: 65px;
+	color: #fff;
+	margin-top: -37.5px;
+}
+
+/*style for city page*/
+#detail-container {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 906px;
+	width: 100%;
+	overflow: visible;
+}
+
+#content-container {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 864px;
+	width: 100%;
+	background: -webkit-linear-gradient(90deg, #718291 , #617588);
+}
+
+.layer-day {
+	border-bottom: 1px solid #fff;
+}
+
+.layer-night {
+	border-bottom: 1px solid #8b8f92;
+}
+
+.current {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 195px;
+	width: 100%;
+}
+
+.current-city {
+	position: absolute;
+	top: 23px;
+	left: calc(50% - 50px);
+	font-size: 24px;
+	line-height:24px;
+	text-align: center;
+}
+
+.current-weather {
+	position: absolute;
+	top: 56px;
+	left: calc(50% - 50px);
+	font-size: 16px;
+	line-height: 16px;
+	text-align: center;
+}
+
+.current-temp {
+	position: absolute;
+	top: 75px;
+	left: calc(50% - 60px);
+	font-size: 80px;
+	font-family: "Helvetica Neue Light" , "HelveticaNeue-UltraLight", Helvetica;
+	line-height: 80px;
+	text-align: center;
+}
+
+.day-temp-tbl {
+	position: absolute;
+	bottom: 0px;
+	left: 10px;
+	width: calc(100% - 20px);
+}
+
+.day-temp-tbl td {
+	width: 25%;
+	color: #fff;
+	font-family: Helvetica;
+}
+
+.day-temp-tbl td:nth-child(2n+2) {
+	color: #b6c0c9;
+}
+
+.day-temp-tbl td:nth-child(n+3) {
+	text-align: right;
+}
+
+#hour-temp {
+	position: absolute;
+	top: 196px;
+	left: 0px;
+	height: 93px;
+	width: 100%;
+	overflow-x: auto;
+}
+
+#hour-temp > table {
+	position: absolute;
+	top: 0px;
+	left: 10px;
+	height: 100%;
+	width: calc(27 * 63.5px);
+	overflow: hidden;
+}
+
+
+#hour-temp  td {
+	position: relative;
+	height: 100%;
+	width: 63.5px;
+}
+
+.hour-temp-time {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	font-size: 13px;
+	line-height: 13px;
+	margin-top: 7px;
+	width: 100%;
+}
+
+
+.hour-temp-icon {
+	position: absolute;
+	top: 41px;
+}
+
+.weather-icon {
+	height: 17px;
+	width: 19px;
+}
+
+.hour-temp-deg {
+	position: absolute;
+	top: 73px;
+	font-size: 13px;
+	line-height: 13px;
+	width: 100%;
+}
+
+#day-weather {
+	position: absolute;
+	top: 290px;
+	width: 100%;
+	height: 228px;
+}
+
+#day-weather > ul {
+	position: absolute;
+	list-style-type: none;
+	top: 15px;
+	left: 10px;
+	height: 195px;
+	width: calc(100% - 20px);
+	font-family: Helvetica;
+	color: #fff;
+}
+
+#day-weather li {
+	height: 13%;
+}
+
+#day-weather table {
+	width: 100%;
+}
+
+#day-weather td {
+	width: 25%;
+}
+
+#day-weather td:nth-child(n+2) {
+	text-align: right;
+}
+
+#day-info {
+	position: absolute;
+	top: 519px;
+	left: 0px;
+	height: 56px;
+	width: 100%;
+}
+
+#day-info > p {
+	position: absolute;
+	top: 12px;
+	left: 10px;
+	height: 32px;
+	width: calc(100% - 20px);
+}
+
+#day-detail {
+	position: absolute;
+	top: 576px;
+	left: 0px;
+	height: 287px;
+	width: 100%;
+}
+
+.day-detail-info {
+	position: absolute;
+	left: 10px;
+	height: 39px;
+	width: calc(100% - 20px);
+}
+
+.day-detail-info:first-child {
+	top: 11px;
+}
+
+.day-detail-info:nth-child(2) {
+	top: calc(11px + 39px + 20.5px);
+}
+
+.day-detail-info:nth-child(3) {
+	top: calc(11px + 2 * 39px + 2 * 20.5px);
+}
+
+.day-detail-info:nth-child(4) {
+	top: calc(11px + 3 * 39px + 3 * 20.5px);
+}
+
+.day-detail-info:nth-child(5) {
+	top: calc(11px + 4 * 39px + 4 * 20.5px);
+}
+
+.day-detail-info > p {
+	position: absolute;
+	line-height: 16px;
+}
+
+.day-detail-info > p:first-child {
+	top: 0px;
+	left: 0px;
+	width: calc(50% - 5px);
+	text-align: right;
+}
+
+.day-detail-info > p:nth-child(2) {
+	top: 0px;
+	left: calc(50% + 5px);
+	width: calc(50% - 5px);
+}
+
+.day-detail-info > p:nth-child(3) {
+	top: 23px;
+	left: 0px;
+	width: calc(50% - 5px);
+	text-align: right;
+}
+
+.day-detail-info > p:nth-child(4) {
+	top: 23px;
+	left: calc(50% + 5px);
+	width: calc(50% - 5px);
+}
+
+footer {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	height: 42px;
+	width: 100%;
+}
+
+footer > p {
+	position: absolute;
+}
+
+footer > #l-arrow {
+	top: 12px;
+	line-height: 12px;
+	left: calc(50% - (11px + 41px + 5px + 6px));
+}
+
+footer > .bullet {
+	top: 12px;
+}
+
+footer > .bullet:nth-child(2) {
+	left: calc(50% - 6px);
+}
+
+footer > .bullet:nth-child(3) {
+	left: calc(50% + 1px);
+}
+
+footer > #r-arrow {
+	top: 12px;
+	line-height: 12px;
+	left: calc(50% + 6px + 41px);
+}
+
+footer > #menu-icon {
+	top: 10px;
+	right: 9px;
+	line-height: 16px;
+	width: 20px;
+}
+
+footer > .deact-icon {
+	opacity: 0.5;
+}
+
+footer > .act-icon {
+	opacity: 0.9;
+}
+
+/*style for sydney.html*/
+#content-container.night {
+	background: -webkit-linear-gradient(90deg, #232931, #0b131e);
+}
+
+footer.day {
+	background-color: #617588;
+	border-top: 1px solid #fff;
+}
+
+footer.night {
+	background-color: #232931;
+	border-top: 1px solid #8b8f92;
+}
+
+.day-temp-tbl td:nth-child(2n+2).night {
+	color: #8b8f92;
+}
