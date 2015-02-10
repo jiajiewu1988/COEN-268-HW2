@@ -18,6 +18,7 @@ a {
 	width: 100%;
 	color: #fff;
 	text-decoration: none;
+    font-family: Helvetica;
 }
 
 p {
@@ -337,6 +338,34 @@ footer > p {
 	position: absolute;
 }
 
+.c-f-choice {
+    left: 0px;
+    top: calc(50% - 8px);
+} 
+
+footer > div > a:nth-child(1) {
+    opacity: 0.5;
+    left: 5px;
+    top: calc(50% - 8px);
+    height: 16px;
+    width: 20px;
+}
+
+.c-f-choice a:nth-child(2) {
+    left: 20px;
+    top: calc(50% - 8px);
+    height: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+footer > div > a:nth-child(3) {
+    top: calc(50% - 8px);
+    left: 40px;
+    height: 16px;
+    width: 20px;
+}
+
 footer > #l-arrow {
 	top: 12px;
 	line-height: 12px;
@@ -347,12 +376,16 @@ footer > .bullet {
 	top: 12px;
 }
 
-footer > .bullet:nth-child(2) {
-	left: calc(50% - 6px);
+footer > .bullet:nth-child(3) {
+	left: calc(50% - 9px);
 }
 
-footer > .bullet:nth-child(3) {
-	left: calc(50% + 1px);
+footer > .bullet:nth-child(4) {
+	left: calc(50%);
+}
+
+footer > .bullet:nth-child(5) {
+	left: calc(50% + 9px);
 }
 
 footer > #r-arrow {
