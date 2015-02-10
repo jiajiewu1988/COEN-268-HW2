@@ -424,6 +424,10 @@ footer.night {
 	border-top: 1px solid #8b8f92;
 }
 
+#main-footer {
+    background: #555;
+}
+
 .day-temp-tbl td:nth-child(2n+2).night {
 	color: #8b8f92;
 }

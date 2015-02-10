@@ -65,7 +65,6 @@ $(document).ready(function(e) {
 			updateInfo(data.daily.summary);
 			updateDetail(data.daily.data[0]);
 			if (!isFarenheit) {
-				console.log("convert temp");
 				convertTemp("f2c");
 			}
 			
@@ -118,10 +117,11 @@ $(document).ready(function(e) {
 				updateInfo(data.daily.summary);
 				updateDetail(data.daily.data[0]);
 				if (!isFarenheit) {
-					console.log("convert temp");
 					convertTemp("f2c");
 				}
 			}, 600000);
+			
+			updateColor(data.currently.icon, city);
 		} else if (type == "main") {
 			
 			$("#detail-container").hide();
@@ -132,7 +132,6 @@ $(document).ready(function(e) {
 				getSanJoseTemp();
 				getSydneyTemp();
 				if (!isFarenheit) {
-					console.log("convert temp");
 					convertTemp("f2c");
 				}
 			}, 600000);
@@ -141,7 +140,6 @@ $(document).ready(function(e) {
 	});
 	
 	$(".celc").click(function(e) {
-		console.log("celc click");
 		if (isFarenheit) {
 			convertTemp("f2c");
 			$(".celc").each(function(index) {
@@ -167,7 +165,6 @@ $(document).ready(function(e) {
 	
 	//auto update time
 	var autoTime = setInterval(function() {
-		console.log("update time");
 		updateTime();
 	}, 60000);
 	
@@ -177,7 +174,6 @@ $(document).ready(function(e) {
 		getSanJoseTemp();
 		getSydneyTemp();
 		if (!isFarenheit) {
-			console.log("convert temp");
 			convertTemp("f2c");
 		}
 	}, 600000);
@@ -195,32 +191,26 @@ var getCurrentTemp = function() {
 			}, 20);
 			
 		}
-		/*$.ajax({
+		$.ajax({
 			type: 'get',
 			url: FORECAST_URL + position.coords.latitude + "," + position.coords.longitude,
 			dataType: 'jsonp',
 			jsonp: 'callback',
 			success: function(result) {
-				console.log(result);
 				localStorage.setItem("currentlocation", JSON.stringify(result));
-				// var item = $('#current-loc p:nth-child(3)');
-				// item.empty();
-				// item.html(Math.round(result.currently.temperature) + "&deg;");	
-				// var hour = new Date(result.currently.time * 1000).getHours();
-				// if (hour >= 6 && hour < 18) {
-					// if (result.daily.icon == "clear-day") $("#current-loc").css("background", "-webkit-linear-gradient(270deg, #2f76a1, #549dc5)");
-					// else $("#current-loc").css("background", "-webkit-linear-gradient(270deg, #718291, #617588)");
-				// } else {
-					// if (result.daily.icon == "clear-day") $("#current-loc").css("background", "-webkit-linear-gradient(270deg, #141830, #262c43)");
-					// else $("#current-loc").css("background", "-webkit-linear-gradient(270deg, #0b131e, #232931)");
-				// }
+				data = localStorage.getItem("currentlocation")
+				if (data) {
+					setTimeout(function() {
+						updateList(JSON.parse(data), "current-loc");
+					}, 20);
+				}
 			},
 			error: function(jqXhr, textStatus, errorThrown) {
 				console.log(jqXhr);
 				console.log(textStatus);
 				console.log(errorThrown);
 			}
-		});*/
+		});
 	};
 
 	var error = function(msg) {
@@ -244,19 +234,21 @@ var getSanJoseTemp = function() {
 			updateList(data, "san-jose");
 		}, 20);
 	}
-	// $.ajax({
-		// type: 'get',
-		// url: FORECAST_URL + '37.3382082,-121.88632860000001',
-		// dataType: 'jsonp',
-		// jsonp: 'callback',
-		// success: function(result) {
-			// console.log(result);
-			// localStorage.setItem("sanjose", JSON.stringify(result));
-		// },
-		// error: function(jqXhr, textStatus, errorThrown) {
-			// console.log(testStatus);
-		// }
-	// });
+	$.ajax({
+		type: 'get',
+		url: FORECAST_URL + '37.3382082,-121.88632860000001',
+		dataType: 'jsonp',
+		jsonp: 'callback',
+		success: function(result) {
+			localStorage.setItem("sanjose", JSON.stringify(result));
+			data = localStorage.getItem("sanjose");
+			data = JSON.parse(data);
+			updateList(data, "san-jose");
+		},
+		error: function(jqXhr, textStatus, errorThrown) {
+			console.log(testStatus);
+		}
+	});
 };
 
 //Change Sydney's Temperature
@@ -267,38 +259,22 @@ var getSydneyTemp = function() {
 			updateList(JSON.parse(data), "sydney");
 		}, 20);
 	}
-	// $.ajax({
-		// type: 'get',
-		// url: FORECAST_URL + '-33.8674869,151.20699020000006',
-		// dataType: 'jsonp',
-		// jsonp: 'callback',
-		// success: function(result) {
-			// console.log(result);
-			// localStorage.setItem("sydney", JSON.stringify(result));
-		// },
-		// error: function(jqXhr, textStatus, errorThrown) {
-			// console.log(jqXhr);
-			// console.log(textStatus);
-			// console.log(errorThrown);
-		// }
-	// });	
-};
-
-//change list item background
-var changeListBackground = function() {
-	var d = new Date();
-	var hour = d.getHours();
-	$(".city-list-item").each(function(index) {
-		if (index >= 2) {
-			hour += 19;
-			hour = hour % 24;
+	$.ajax({
+		type: 'get',
+		url: FORECAST_URL + '-33.8674869,151.20699020000006',
+		dataType: 'jsonp',
+		jsonp: 'callback',
+		success: function(result) {
+			localStorage.setItem("sydney", JSON.stringify(result));
+			data = localStorage.getItem("sydney");
+			updateList(JSON.parse(data), "sydney");
+		},
+		error: function(jqXhr, textStatus, errorThrown) {
+			console.log(jqXhr);
+			console.log(textStatus);
+			console.log(errorThrown);
 		}
-		if (hour >= 6 && hour < 18) {
-			$(this).css("background", "-webkit-linear-gradient(270deg, #2f76a1, #549dc5)");
-		} else {
-			$(this).css("background", "-webkit-linear-gradient(270deg, #141830, #262c43)");
-		}
-	});
+	});	
 };
 
 var updateTime = function() {
@@ -348,13 +324,13 @@ var updateList = function(data, city) {
 	}
 	if (hour >= 6 && hour < 18) {
 		if (data.daily.icon == "clear-day") {
-			$("#" + city).css("background", "-webkit-linear-gradient(270deg, #2f76a1, #549dc5)");
+			$("#" + city).css("background", "-webkit-linear-gradient(90deg, #2f76a1, #549dc5)");
 		}
 		else {
-			$("#" + city).css("background", "-webkit-linear-gradient(270deg, #718291, #617588)");
+			$("#" + city).css("background", "-webkit-linear-gradient(90deg, #718291, #617588)");
 		}
 	} else {
-		if (data.daily.icon == "clear-day") {
+		if (data.daily.icon == "clear-night") {
 			$("#" + city).css("background", "-webkit-linear-gradient(270deg, #141830, #262c43)");
 		}
 		else {
@@ -403,6 +379,7 @@ var updateHourly = function(hourlyData) {
 		var hour = "12 AM";
 		if (i != 0) {
 			hour = getTime(hourlyData[i].time, true);
+			
 			$("#hour-temp td:nth-child(" + (i+1) +") p:nth-child(1)").html(hour);
 		}
 		var imgSrc = "icons/" + hourlyData[i].icon + ".png";
@@ -465,6 +442,91 @@ var updateDetail = function(details) {
 	$(".visibility-info p:nth-child(2)").html(details.visibility + " mi");
 };
 
+var updateColor = function(type, city) {
+	hour = new Date().getHours();
+	if (city == "sydney") {
+		hour = (hour + 19) % 24;
+	}
+	
+	if (window.location.hash.substring(1, 5) == "city") {
+		// $("#" + city).css("background", "-webkit-linear-gradient(90deg, #2f76a1, #549dc5)");
+		if (hour >= 6 && hour < 18) {
+			if (type == "clear-day") {
+				$("#content-container").css("background", "-webkit-linear-gradient(90deg, #2f76a1, #549dc5)");
+				$("#detail-footer").css("background", "#2f76a1");
+			} else {
+				$("#content-container").css("background", "-webkit-linear-gradient(90deg, #718291, #617588)");
+				$("#detail-footer").css("background", "#718291");
+			}
+			$("#content-container div").each(function(index) {
+				$(this).css("border-color", "#fff");
+			});
+			$("#detail-footer").css("border-color", "#fff");
+		} else {
+			if (type == "clear-night") {
+				$("#content-container").css("background", "-webkit-linear-gradient(270deg, #141830, #262c43)");
+				$("#detail-footer").css("background", "#262c43");
+			} else {
+				$("#content-container").css("background", "-webkit-linear-gradient(270deg, #0b131e, #232931)");
+				$("#detail-footer").css("background", "#232931");
+			}
+			$("#content-container div").each(function(index) {
+				$(this).css("border-color", "#8b8f92");
+			});
+			$("#detail-footer").css("border-color", "#8b8f92");
+		}
+	}
+	
+	// $(elem).find("p").each(function(index) {
+		// console.log(hour);
+		// if (hour >= 6 && hour < 18) {
+			// if (type == "clear-day") {
+				// $(this).css("color", "#a1c8df");
+			// } else {
+				// $(this).css("color", "#b6c0c9");
+			// }
+		// } else {
+			// if (type == "clear-night") {
+				// $(this).css("color", "#8d8f9a");
+			// } else {
+				// $(this).css("color", "#8d8f9a");
+			// }
+		// }
+	// });
+	
+	// $(elem).find("a").each(function(index) {
+		// if (hour >= 6 && hour < 18) {
+			// if (type == "clear-day") {
+				// $(this).css("color", "#a1c8df");
+			// } else {
+				// $(this).css("color", "#b6c0c9");
+			// }
+		// } else {
+			// if (type == "clear-night") {
+				// $(this).css("color", "#8d8f9a");
+			// } else {
+				// $(this).css("color", "#8d8f9a");
+			// }
+		// }
+	// });
+	
+	// $(elem).find("td").each(function(index) {
+		// if (hour >= 6 && hour < 18) {
+			// if (type == "clear-day") {
+				// $(this).css("color", "#a1c8df");
+			// } else {
+				// $(this).css("color", "#b6c0c9");
+			// }
+		// } else {
+			// if (type == "clear-night") {
+				// $(this).css("color", "#8d8f9a");
+			// } else {
+				// $(this).css("color", "#8d8f9a");
+			// }
+		// }
+	// });
+};
+
 var center = function(elem) {
 	var halfWidth = elem.width() / 2;
 	elem.css("left", "calc(50% - " + halfWidth + "px)");
@@ -504,6 +566,9 @@ var convertTemp = function(type) {
  */
 var getTime = function(miliSec, isHour) {
 	hour = new Date(miliSec * 1000).getHours();
+	if (window.location.hash == "#city/sydney") {
+		hour = (hour + 19) % 24;
+	}
 	min = new Date(miliSec * 1000).getMinutes();
 	if (min < 10) {
 		min = "0" + min;
