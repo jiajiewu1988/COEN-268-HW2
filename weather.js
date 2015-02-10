@@ -436,8 +436,8 @@ var updateDetail = function(details) {
 	$(".wind-info p:nth-child(2)").html(details.windSpeed + " mph " + windDirection);
 	$(".wind-info p:nth-child(4)").html(Math.round((details.apparentTemperatureMin + details.apparentTemperatureMax) / 2) + "&deg;");
 	
-	$(".pressure-info p:nth-child(2)").html(details.precipIntensity + " in");
-	$(".pressure-info p:nth-child(4)").html(details.pressure);
+	$(".pressure-info p:nth-child(2)").html((details.precipIntensity * 0.0393701).toFixed(2) + " in");
+	$(".pressure-info p:nth-child(4)").html((details.pressure * 0.0002952998307141).toFixed(3) + " in");
 	
 	$(".visibility-info p:nth-child(2)").html(details.visibility + " mi");
 };
@@ -449,7 +449,6 @@ var updateColor = function(type, city) {
 	}
 	
 	if (window.location.hash.substring(1, 5) == "city") {
-		// $("#" + city).css("background", "-webkit-linear-gradient(90deg, #2f76a1, #549dc5)");
 		if (hour >= 6 && hour < 18) {
 			if (type == "clear-day") {
 				$("#content-container").css("background", "-webkit-linear-gradient(90deg, #2f76a1, #549dc5)");
@@ -476,55 +475,6 @@ var updateColor = function(type, city) {
 			$("#detail-footer").css("border-color", "#8b8f92");
 		}
 	}
-	
-	// $(elem).find("p").each(function(index) {
-		// console.log(hour);
-		// if (hour >= 6 && hour < 18) {
-			// if (type == "clear-day") {
-				// $(this).css("color", "#a1c8df");
-			// } else {
-				// $(this).css("color", "#b6c0c9");
-			// }
-		// } else {
-			// if (type == "clear-night") {
-				// $(this).css("color", "#8d8f9a");
-			// } else {
-				// $(this).css("color", "#8d8f9a");
-			// }
-		// }
-	// });
-	
-	// $(elem).find("a").each(function(index) {
-		// if (hour >= 6 && hour < 18) {
-			// if (type == "clear-day") {
-				// $(this).css("color", "#a1c8df");
-			// } else {
-				// $(this).css("color", "#b6c0c9");
-			// }
-		// } else {
-			// if (type == "clear-night") {
-				// $(this).css("color", "#8d8f9a");
-			// } else {
-				// $(this).css("color", "#8d8f9a");
-			// }
-		// }
-	// });
-	
-	// $(elem).find("td").each(function(index) {
-		// if (hour >= 6 && hour < 18) {
-			// if (type == "clear-day") {
-				// $(this).css("color", "#a1c8df");
-			// } else {
-				// $(this).css("color", "#b6c0c9");
-			// }
-		// } else {
-			// if (type == "clear-night") {
-				// $(this).css("color", "#8d8f9a");
-			// } else {
-				// $(this).css("color", "#8d8f9a");
-			// }
-		// }
-	// });
 };
 
 var center = function(elem) {
