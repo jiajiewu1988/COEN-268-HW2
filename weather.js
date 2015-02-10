@@ -215,6 +215,26 @@ var getCurrentTemp = function() {
 
 	var error = function(msg) {
 		console.log(msg);
+		$.ajax({
+			type: 'get',
+			url: FORECAST_URL + '37.3382082,-121.88632860000001',
+			dataType: 'jsonp',
+			jsonp: 'callback',
+			success: function(result) {
+				localStorage.setItem("currentlocation", JSON.stringify(result));
+				data = localStorage.getItem("currentlocation")
+				if (data) {
+					setTimeout(function() {
+						updateList(JSON.parse(data), "current-loc");
+					}, 20);
+				}
+			},
+			error: function(jqXhr, textStatus, errorThrown) {
+				console.log(jqXhr);
+				console.log(textStatus);
+				console.log(errorThrown);
+			}
+		});
 	};
 	
 	if (navigator.geolocation) {
@@ -505,6 +525,11 @@ var convertTemp = function(type) {
 			$(this).html(num + "&deg;");
 		});
 		isFarenheit = false;
+	}
+	if ($("#current-temp").width() < 100) {
+		$("#current-temp").css("left", "calc(50% - 40px)");
+	} else {
+		$("#current-temp").css("left", "calc(50% - 60px)");
 	}
 };
 
